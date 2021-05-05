@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="tickets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ticket" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="number" type="xs:positiveInteger" />
+              <xs:element name="dateOfIssue" type="xs:dateTime" />
+              <xs:element name="status" type="typeOfStatus" />
+              <xs:element name="userId" type="xs:positiveInteger" />
+              <xs:element name="inquiryType" type="typeOfInqury" />
+              <xs:element name="messages">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="message" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="userId" type="xs:positiveInteger" />
+                            <xs:attribute name="userName" type="xs:string" />
+                            <xs:attribute name="sendDateTime" type="xs:dateTime" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+   
+  <!--custom data type-->
+  <xs:simpleType name="typeOfStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="New" />
+      <xs:enumeration value="On-going" />
+      <xs:enumeration value="Resolved" />
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="typeOfInqury">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="General" />
+      <xs:enumeration value="Products" />
+      <xs:enumeration value="Exchange and return" />
+      <xs:enumeration value="Careers" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

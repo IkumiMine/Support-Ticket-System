@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+/* CONTENTS           */
+/* 1.COLORS           */
+/* 2.GENERAL STYLING  */
+/* 3.TOGGLE NAVI      */
+/* 4.HEADER           */
+/* 5.LOGIN FORM       */
+/* 6.NEW MESSAGE FORM */
+/* 7.TICKET LIST      */
+/* 8.MEDIA QUERY      */
+
+/* 1.COLORS */
+/*
+white: #f8f5f1;
+orange: #e9896a;
+green: #387c6d;
+blue: #343f56;
+ */
+
+/* 2.GENERAL STYLING */
+html {
+    font-size: 62.5%; /* 10px/16px */
+}
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.8rem;
+    background-color: #f8f5f1;
+    color: #343f56;
+}
+.hidden {
+    position: absolute;
+    left: -10000px;
+    width:1px;
+    height:1px;
+}
+.back-list:hover,
+.back-list:active {
+    text-decoration: none;
+}
+.error_msg {
+    color: #e9896a;
+}
+/* 3.TOGGLE NAVI */
+.nav-toggle-icon {
+    color: #f8f5f1;
+    font-size: 2.5rem;
+}
+/* 4.HEADER */
+.header {
+    background-color: #e9896a;
+}
+.nav-title {
+    font-size: 3.2rem;
+}
+.header a:link,
+.header a:visited {
+    color: #f8f5f1;
+}
+.header a:hover,
+.header a:active {
+    color: #387c6d;
+}
+/* 5.LOGIN FORM */
+.login-form-box {
+    width: 33%;
+    transform: translate(-50%, -50%);
+}
+.login-btn {
+    font-size: 1.6rem;
+}
+.login-body {
+    background: #e9896a;
+}
+/* 6.NEW MESSAGE FORM */
+.newMsg-form-font {
+    font-size: 1.6rem;
+}
+.newMsg-select {
+    width: 25%;
+}
+/* 7.TICKET LIST */
+.detail-btn {
+    font-size: 1.6rem;
+}
+/* 8.MEDIA QUERY */
+@media all and (max-width:1025px) {
+    .login-form-box {
+        width: 50%;
+    }
+}
+@media all and (max-width:426px) {
+    .login-form-box {
+        width: 70%;
+    }
+    .newMsg-select {
+        width: 50%;
+    }
+}

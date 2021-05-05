@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="users-support-ticket.xsd">
+  <user>
+    <userId userType="client">0001</userId>
+    <password>71112dcbe9a8ff9c204efb09d30a1f40</password>
+    <name>
+      <first>Ikumi</first>
+      <last>Mine</last>
+    </name>
+    <email>ikumine@gmail.com</email>
+    <phoneNumber>4169961900</phoneNumber>
+  </user>
+  <user>
+    <userId userType="staff">0002</userId>
+    <password>80c2868bbcc6f7432d5598670fc853ed</password>
+    <name>
+      <first>Rey</first>
+      <last>Abdul</last>
+    </name>
+    <email>reyabdul@gmail.com</email>
+    <phoneNumber>6477396303</phoneNumber>
+  </user>
+</users>
