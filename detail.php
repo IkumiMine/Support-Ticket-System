@@ -84,7 +84,7 @@ if ($user_type == "client") {
     <link href="css/all.css" rel="stylesheet">
 </head>
 <body>
-    <?php include_once 'header.php' ?>
+    <?php include_once 'components/header.php' ?>
     <main class="ticket-list pb-5">
         <div class="container-fluid">
             <h1 class="my-5 ms-5">Welcome back, <span><?= isset($session_username) ? $session_username : ""; ?></span>!</h1>
@@ -169,7 +169,7 @@ if ($user_type == "client") {
 
         </div>
     </main>
-    <?php include_once 'footer.php' ?>
+    <?php include_once 'components/footer.php' ?>
     <!--bootstrap js-->
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <!--custom js-->

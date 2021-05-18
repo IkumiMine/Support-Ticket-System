@@ -63,13 +63,13 @@ if(isset($_POST['login'])){
         <link href="css/all.css" rel="stylesheet">
     </head>
     <body class="login-body">
-    <?php include_once 'header.php' ?>
+    <?php include_once 'components/header.php' ?>
     <main class="position-relative vh-100">
         <div class="container-fluid">
-            <?php include_once 'login.php' ?>
+            <?php include_once 'components/login.php' ?>
         </div>
     </main>
-    <?php include_once 'footer.php' ?>
+    <?php include_once 'components/footer.php' ?>
     <!--bootstrap js-->
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <!--custom js-->

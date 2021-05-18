@@ -29,7 +29,7 @@ If(isset($_SESSION['user'])){
                         <a class="nav-link me-3" href="<?= $list; ?>">List</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="logout.php">Logout</a>
+                        <a class="nav-link" href="components/logout.php">Logout</a>
                     </li>
                 </ul>
             </div>

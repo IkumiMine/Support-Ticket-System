@@ -7,9 +7,9 @@ date_default_timezone_set('America/Toronto');
 
 //if session is not set and user type is not client, go back to login page
 If(!isset($_SESSION['user'])){
-    header('Location: login.php');
+    header('Location: index.php');
 } else if ($_SESSION['user']['type'] != "client"){
-    header('Location: login.php');
+    header('Location: index.php');
 } else {
     $session_clientname = $_SESSION['user']['fname']." ".$_SESSION['user']['lname'];
 }
@@ -89,7 +89,7 @@ if(isset($_POST['create'])){
         <link href="css/all.css" rel="stylesheet">
     </head>
     <body>
-        <?php include_once 'header.php' ?>
+        <?php include_once 'components/header.php' ?>
         <main class="ticket-list pb-5">
             <div class="container-fluid">
                 <h1 class="my-5 ms-5">Welcome back, <span><?= isset($session_clientname) ? $session_clientname : ""; ?></span>!</h1>
@@ -157,7 +157,7 @@ if(isset($_POST['create'])){
                 </div>
             </div>
         </main>
-        <?php include_once 'footer.php' ?>
+        <?php include_once 'components/footer.php' ?>
         <!--bootstrap js-->
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
         <!--custom js-->
