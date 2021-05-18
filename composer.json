@@ -1,1 +1,8 @@
-{}
+{
+  "autoload": {
+    "psr-4": {
+      "assignment2\\models\\": "models/",
+      "assignment2\\functions\\": "functions/"
+    }
+  }
+}

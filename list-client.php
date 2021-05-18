@@ -1,35 +1,41 @@
 <?php
 session_start();
-require_once '../models/Xml.php';
+use assignment2\models\Xml;
+use assignment2\functions\Functions;
+require_once 'vendor/autoload.php';
 date_default_timezone_set('America/Toronto');
+
+//if session is not set and user type is not client, go back to login page
+If(!isset($_SESSION['user'])){
+    header('Location: login.php');
+} else if ($_SESSION['user']['type'] != "client"){
+    header('Location: login.php');
+} else {
+    $session_clientname = $_SESSION['user']['fname']." ".$_SESSION['user']['lname'];
+}
+
+//Get functions
+$f = new Functions();
 
 //load xml files
 $new = new Xml();
 $xml_ticket = $new->loadTickets();
 $xml_user = $new->loadUser();
-$client_tickets = $new->getSelectedTicketById($_SESSION['userID'], $xml_ticket);
-$selected_user = $new->getSelectedUser($_SESSION['userID'], $xml_user);
+$client_tickets = $new->getSelectedTicketById($_SESSION['user']['id'], $xml_ticket);
+$selected_user = $new->getSelectedUser($_SESSION['user']['id'], $xml_user);
 //var_dump(strval($selected_user['type']));
-
-//if session is not set and user type is not client, go back to login page
-If(!isset($_SESSION['user_fname']) && !isset($_SESSION['user_lname']) && !isset($_SESSION['userID'])){
-    header('Location: login.php');
-} else if (strval($selected_user['type']) != "client"){
-    header('Location: login.php');
-} else {
-    $session_clientname = $_SESSION['user_fname']." ".$_SESSION['user_lname'];
-}
 
 //create new ticket
 if(isset($_POST['create'])){
 
     $type_err = $msg_err = "";
+    var_dump($_POST['inquiryType']);
 
-    if( $_POST['inquiryType'] == 0 && $_POST['create_msg'] == ""){
+    if($_POST['inquiryType'] == "0" && $_POST['create_msg'] == ""){
         $type_err = "Please fill out the form.";
-    } else if($_POST['inquiryType'] == 0 && $_POST['create_msg'] !== "") {
+    } else if($_POST['inquiryType'] == "0" && $_POST['create_msg'] !== "") {
         $type_err = "Please select inquiry type.";
-    } else if ($_POST['inquiryType'] !== 0 && $_POST['create_msg'] == "") {
+    } else if ($_POST['inquiryType'] !== "0" && $_POST['create_msg'] == "") {
         $msg_err = "Please enter your message.";
     } else {
         //Get values of reply message
@@ -37,9 +43,9 @@ if(isset($_POST['create'])){
         $new_date = date(DateTime::RFC3339, time());
         $new_status = "New";
         $new_type = $_POST['inquiryType'];
-        $new_user_id = $_SESSION['userID'];
+        $new_user_id = $_SESSION['user']['id'];
         $new_msg = $_POST['create_msg'];
-        $new_user_name = $_SESSION['user_fname']." ".$_SESSION['user_lname'];
+        $new_user_name = $_SESSION['user']['fname']." ".$_SESSION['user']['lname'];
 
         //Add to xml file with nice format - it's not working yet.
         //$basedata = $new_ticket;
@@ -57,8 +63,8 @@ if(isset($_POST['create'])){
         $add_new_msg->addAttribute("userName", $new_user_name);
         $add_new_msg->addAttribute('sendDateTime', $new_date);
 
-        $xml_ticket->saveXML("../xml/tickets-support-ticket.xml");
-        $client_tickets = $new->getSelectedTicketById($_SESSION['userID'], $xml_ticket);
+        $xml_ticket->saveXML("xml/tickets-support-ticket.xml");
+        $client_tickets = $new->getSelectedTicketById($_SESSION['user']['id'], $xml_ticket);
         /*
         $dom = dom_import_simplexml($add_ticket)->ownerDocument;
         $dom->preserveWhiteSpace = false;
@@ -76,11 +82,11 @@ if(isset($_POST['create'])){
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Support Ticket System</title>
         <!--bootstrap 5.0.0-->
-        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <!--custom css-->
-        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="css/style.css">
         <!--icons-->
-        <link href="../css/all.css" rel="stylesheet">
+        <link href="css/all.css" rel="stylesheet">
     </head>
     <body>
         <?php include_once 'header.php' ?>
@@ -92,7 +98,7 @@ if(isset($_POST['create'])){
                 <!--only user will have new ticket function-->
                 <div class="card shadow newMsg-form w-75 my-5 mx-auto p-5">
                     <h2>Create a new message</h2>
-                    <form action="list-client.php" method="post">
+                    <form action="" method="post">
                         <div class="mb-3">
                             <label for="inquiryType">Inquiry Type</label>
                             <span class="error_msg"><?= isset($type_err)? $type_err: ''; ?></span>
@@ -129,7 +135,7 @@ if(isset($_POST['create'])){
                             </thead>
                             <tbody>
                             <?php foreach($client_tickets as $client_ticket) {
-                                $new_date = $new->formatDate($client_ticket->dateOfIssue);
+                                $new_date = $f->formatDate($client_ticket->dateOfIssue);
                             ?>
                                 <tr>
                                     <td scope='row' class='align-middle'><?= $client_ticket->number; ?></td>
@@ -153,7 +159,7 @@ if(isset($_POST['create'])){
         </main>
         <?php include_once 'footer.php' ?>
         <!--bootstrap js-->
-        <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
         <!--custom js-->
     </body>
 </html>

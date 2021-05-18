@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4193b53-9187-4ea2-8573-f8c144b65ece" name="Default Changelist" comment="" />
+    <list default="true" id="f4193b53-9187-4ea2-8573-f8c144b65ece" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Xml.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Xml.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/detail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/footer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/header.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/list-client.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/list-staff.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/logout.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/xml/tickets-support-ticket.xml" beforeDir="false" afterPath="$PROJECT_DIR$/xml/tickets-support-ticket.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +51,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../APIproject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -50,6 +62,12 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\MAMP\htdocs\5203\assignment2" />
+      <recent name="C:\MAMP\htdocs\5203\assignment2\components" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -84,6 +102,7 @@
       <workItem from="1620238279589" duration="17000" />
       <workItem from="1620245165283" duration="726000" />
       <workItem from="1620246312848" duration="9000" />
+      <workItem from="1621347116028" duration="13169000" />
     </task>
     <servers />
   </component>

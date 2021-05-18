@@ -1,9 +1,11 @@
 <?php
+namespace assignment2\models;
+
 class Xml {
 
     //load user xml file
     public function loadUser(){
-        $xml_user = simplexml_load_file("../xml/users-support-ticket.xml");
+        $xml_user = simplexml_load_file("xml/users-support-ticket.xml");
         return $xml_user;
     }
 
@@ -25,7 +27,7 @@ class Xml {
     public function getSelectedUser($id, $xml_user) {
 
         $selecred_user = array (
-            "type" => $xml_user->xpath("//userId[text() = ".$id."]/@userType")[0],
+            "type" => strval($xml_user->xpath("//userId[text() = ".$id."]/@userType")[0]),
             "fname" => strval($xml_user->xpath("//userId[text() = ".$id."]/..//first")[0]),
             "lname" => strval($xml_user->xpath("//userId[text() = ".$id."]/..//last")[0]),
             "id" => strval($xml_user->xpath("//userId[text() = ".$id."]")[0])
@@ -36,7 +38,7 @@ class Xml {
 
     //load ticket xml file
     public function loadTickets() {
-        $xml_ticket = simplexml_load_file("../xml/tickets-support-ticket.xml");
+        $xml_ticket = simplexml_load_file("xml/tickets-support-ticket.xml");
         return $xml_ticket;
     }
 
@@ -52,11 +54,5 @@ class Xml {
         return $selected_ticket;
     }
 
-    //format date and time from xml to display
-    public function formatDate($date) {
-        $date_issue = new DateTime($date);
-        $new_date = date_format($date_issue, 'Y-m-d H:i:s');
-        return $new_date;
-    }
 
 }

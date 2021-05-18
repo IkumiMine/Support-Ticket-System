@@ -1,21 +1,26 @@
 <?php
 session_start();
-require_once '../models/Xml.php';
+use assignment2\models\Xml;
+use assignment2\functions\Functions;
+require_once 'vendor/autoload.php';
 date_default_timezone_set('America/Toronto');
+
+//if session is not set, go back to login page
+If(!isset($_SESSION['user'])) {
+    header('Location: login.php');
+} else {
+    $session_username = $_SESSION['user']['fname']." ".$_SESSION['user']['lname'];
+}
+
+//Get functions
+$f = new Functions();
 
 //Load a xml file
 $new = new Xml();
 $xml_ticket = $new->loadTickets();
 $xml_user = $new->loadUser();
 $ticket = $new->getSelectedTicketByNum($_GET['number'], $xml_ticket);
-$user = $new->getSelectedUser($_SESSION['userID'], $xml_user);
-
-//if session is not set, go back to login page
-If(!isset($_SESSION['user_fname']) && !isset($_SESSION['user_lname']) && !isset($_SESSION['userID'])) {
-    header('Location: ../login.php');
-} else {
-    $session_username = $_SESSION['user_fname']." ".$_SESSION['user_lname'];
-}
+//$user = $new->getSelectedUser($_SESSION['user']['id'], $xml_user);
 
 If(isset($_GET['details'])){
 
@@ -23,13 +28,13 @@ If(isset($_GET['details'])){
     $status = $ticket->status;
     $inquiry_type = $ticket->inquiryType;
     $messages = $ticket->messages;
-    $new_date = $new->formatDate($ticket->dateOfIssue);
+    $new_date = $f->formatDate($ticket->dateOfIssue);
 }
 
 //update status
 if(isset($_POST['update'])) {
     $ticket->status = $_POST['status'];
-    $xml_ticket->saveXML("../xml/tickets-support-ticket.xml");
+    $xml_ticket->saveXML("xml/tickets-support-ticket.xml");
 }
 
 //reply message
@@ -41,8 +46,8 @@ if(isset($_POST['reply'])){
         $msg_err = "Please enter your message.";
     } else {
         $new_msg = $_POST['replyMsg'];
-        $new_user_id = $_SESSION['userID'];
-        $new_user_name = $_SESSION['user_fname']." ".$_SESSION['user_lname'];
+        $new_user_id = $_SESSION['user']['id'];
+        $new_user_name = $_SESSION['user']['fname']." ".$_SESSION['user']['lname'];
         $formatted_new_send_date = date(DateTime::RFC3339, time());
 
         //add userId, username send date, message
@@ -50,15 +55,16 @@ if(isset($_POST['reply'])){
         $new_message->addAttribute("userId", $new_user_id);
         $new_message->addAttribute("userName", $new_user_name);
         $new_message->addAttribute("sendDateTime", $formatted_new_send_date);
-        $xml_ticket->saveXML("../xml/tickets-support-ticket.xml");
+        $xml_ticket->saveXML("xml/tickets-support-ticket.xml");
     }
 }
 
 //link to the list page
 $link = "";
-if ($user['type'] == "client") {
+$user_type = $_SESSION['user']['type'];
+if ($user_type == "client") {
     $link = "list-client.php";
-} else if ($user['type'] == "staff") {
+} else if ($user_type == "staff") {
     $link = "list-staff.php";
 } else {
     echo "error";
@@ -71,11 +77,11 @@ if ($user['type'] == "client") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Support Ticket System</title>
     <!--bootstrap 5.0.0-->
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!--custom css-->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <!--icons-->
-    <link href="../css/all.css" rel="stylesheet">
+    <link href="css/all.css" rel="stylesheet">
 </head>
 <body>
     <?php include_once 'header.php' ?>
@@ -94,7 +100,7 @@ if ($user['type'] == "client") {
                         </div>
                         <div class='col-lg-6'>
                             <p>Status:</p>
-                            <?php if($user['type'] == "staff"){ ?>
+                            <?php if($user_type == "staff"){ ?>
                                 <form action="" method="post" class="row row-cols-lg-auto align-items-center">
                                     <div class="col-12">
                                         <select name="status" id="status" class="form-select newMsg-form-font">
@@ -127,7 +133,7 @@ if ($user['type'] == "client") {
                         <ul class="list-group">
                         <?php for($i = 0; $i < count($messages->message); $i++) {
                             //format date
-                            $send_date = $new->formatDate($messages->message[$i]['sendDateTime']);
+                            $send_date = $f->formatDate($messages->message[$i]['sendDateTime']);
 
                             //set bg color green if it's staff
                             $sender = $new->getSelectedUser($messages->message[$i]['userId'], $xml_user);
@@ -165,7 +171,7 @@ if ($user['type'] == "client") {
     </main>
     <?php include_once 'footer.php' ?>
     <!--bootstrap js-->
-    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <!--custom js-->
 </body>
 </html>

@@ -1,22 +1,26 @@
 <?php
 session_start();
-require_once '../models/Xml.php';
+use assignment2\models\Xml;
+use assignment2\functions\Functions;
+require_once 'vendor/autoload.php';
+
+//if session is not set and user type is not staff, go back to login page
+If(!isset($_SESSION['user'])){
+    header('Location: index.php');
+} else if ($_SESSION['user']['type'] != "staff"){
+    header('Location: index.php');
+} else {
+    $session_staffname = $_SESSION['user']['fname']." ".$_SESSION['user']['lname'];
+}
 
 //load xml files
 $new = new Xml();
 $xml_user = $new->loadUser();
-$new_user = $new->getSelectedUser($_SESSION['userID'], $xml_user);
+$new_user = $new->getSelectedUser($_SESSION['user']['id'], $xml_user);
 $xml_tickets = $new->loadTickets();
 
-//if session is not set and user type is not staff, go back to login page
-If(!isset($_SESSION['user_fname']) && !isset($_SESSION['user_lname']) && !isset($_SESSION['userID'])){
-    header('Location: login.php');
-} else if (strval($new_user['type']) != "staff"){
-    header('Location: login.php');
-} else {
-    $session_staffname = $_SESSION['user_fname']." ".$_SESSION['user_lname'];
-}
-
+//Get functions
+$f = new Functions();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,11 +29,11 @@ If(!isset($_SESSION['user_fname']) && !isset($_SESSION['user_lname']) && !isset(
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Support Ticket System</title>
     <!--bootstrap 5.0.0-->
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!--custom css-->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <!--icons-->
-    <link href="../css/all.css" rel="stylesheet">
+    <link href="css/all.css" rel="stylesheet">
 </head>
 <body>
 <?php include_once 'header.php' ?>
@@ -54,7 +58,7 @@ If(!isset($_SESSION['user_fname']) && !isset($_SESSION['user_lname']) && !isset(
                     </thead>
                     <tbody>
                     <?php foreach($xml_tickets as $ticket) {
-                        $new_date = $new->formatDate($ticket->dateOfIssue)
+                        $new_date = $f->formatDate($ticket->dateOfIssue)
                     ?>
                         <tr>
                             <td scope='row' class='align-middle'><?= $ticket->number; ?></td>
@@ -83,7 +87,7 @@ If(!isset($_SESSION['user_fname']) && !isset($_SESSION['user_lname']) && !isset(
 </main>
 <?php include_once 'footer.php' ?>
 <!--bootstrap js-->
-<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 <!--custom js-->
 </body>
 </html>
