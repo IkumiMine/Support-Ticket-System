@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4193b53-9187-4ea2-8573-f8c144b65ece" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/list-client.php" beforeDir="false" afterPath="$PROJECT_DIR$/list-client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/list-staff.php" beforeDir="false" afterPath="$PROJECT_DIR$/list-staff.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/logout.php" afterDir="false" />
-    </list>
+    <list default="true" id="f4193b53-9187-4ea2-8573-f8c144b65ece" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +90,7 @@
       <workItem from="1620238279589" duration="17000" />
       <workItem from="1620245165283" duration="726000" />
       <workItem from="1620246312848" duration="9000" />
-      <workItem from="1621347116028" duration="13502000" />
+      <workItem from="1621347116028" duration="13734000" />
     </task>
     <servers />
   </component>
